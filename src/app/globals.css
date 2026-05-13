@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── 디자인 시스템 (Mobile First) ────────────────────────────────────── */
+:root {
+  --font-noto: "Noto Sans KR", sans-serif;
+  --font-inter: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --radius-card: 16px;
+  --radius-pill: 999px;
+  --radius-btn: 12px;
+  
+  /* Day Theme (Crisp & Clean) */
+  --day-bg-base: #F1F3F5;
+  --day-bg-surface: #FFFFFF;
+  --day-bg-card: rgba(255, 255, 255, 0.98);
+  --day-bg-elevated: #F8F9FA;
+  --day-text-primary: #1C1C1E;
+  --day-text-secondary: #48484A;
+  --day-text-muted: #8E8E93;
+  --day-border: rgba(0, 0, 0, 0.08);
+  --day-primary: #10B981;
+  --day-secondary: #007AFF;
+  --day-accent: #5856D6;
+
+  /* Night Theme (Deep & Premium) */
+  --night-bg-base: #000000;
+  --night-bg-surface: #1C1C1E;
+  --night-bg-card: rgba(28, 28, 30, 0.9);
+  --night-bg-elevated: #2C2C2E;
+  --night-text-primary: #FFFFFF;
+  --night-text-secondary: #AEAEB2;
+  --night-text-muted: #636366;
+  --night-border: rgba(255, 255, 255, 0.1);
+  --night-primary: #34D399;
+  --night-secondary: #0A84FF;
+  --night-accent: #BF5AF2;
+}
+
+:root {
+  --color-bg-base: var(--night-bg-base);
+  --color-bg-surface: var(--night-bg-surface);
+  --color-bg-card: var(--night-bg-card);
+  --color-bg-elevated: var(--night-bg-elevated);
+  --color-text-primary: var(--night-text-primary);
+  --color-text-secondary: var(--night-text-secondary);
+  --color-text-muted: var(--night-text-muted);
+  --color-glass-border: var(--night-border);
+  --color-primary: var(--night-primary);
+  --color-primary-glow: rgba(52, 211, 153, 0.3);
+  --color-secondary: var(--night-secondary);
+  --color-secondary-glow: rgba(10, 132, 255, 0.3);
+  --color-accent: var(--night-accent);
+  --color-danger: #FF453A;
+  --color-warning: #FF9F0A;
+}
+
+[data-theme='day'] {
+  --color-bg-base: var(--day-bg-base);
+  --color-bg-surface: var(--day-bg-surface);
+  --color-bg-card: var(--day-bg-card);
+  --color-bg-elevated: var(--day-bg-elevated);
+  --color-text-primary: var(--day-text-primary);
+  --color-text-secondary: var(--day-text-secondary);
+  --color-text-muted: var(--day-text-muted);
+  --color-glass-border: var(--day-border);
+  --color-primary: var(--day-primary);
+  --color-primary-glow: rgba(16, 185, 129, 0.2);
+  --color-secondary: var(--day-secondary);
+  --color-secondary-glow: rgba(0, 122, 255, 0.15);
+  --color-accent: var(--day-accent);
+}
+
+/* ── Base Layout ───────────────────────────────────────────────────────── */
+body {
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+  font-family: var(--font-noto);
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: var(--color-bg-surface);
+  box-shadow: 0 0 40px rgba(0,0,0,0.2);
+  position: relative;
+  overflow: hidden; /* 레이아웃 이탈 방지 */
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding-bottom: calc(72px + env(safe-area-inset-bottom));
+  width: 100%;
+}
+
+/* ── Typography ────────────────────────────────────────────────────────── */
+.page-header {
+  padding: 24px 20px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.section-pad {
+  padding: 0 16px;
+}
+
+/* ── UI Components ─────────────────────────────────────────────────────── */
+.glass-card {
+  background: var(--color-bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius-card);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: white;
+  width: 100%;
+  padding: 16px;
+  border-radius: var(--radius-btn);
+  font-weight: 700;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px var(--color-primary-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.1s;
+}
+
+.btn-primary:active { transform: scale(0.97); }
+
+.btn-secondary {
+  background: var(--color-bg-elevated);
+  color: var(--color-text-primary);
+  width: 100%;
+  padding: 16px;
+  border-radius: var(--radius-btn);
+  font-weight: 600;
+  font-size: 15px;
+  border: 1px solid var(--color-glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.animate-spin { animation: spin 1s linear infinite; }
+
+@keyframes pulse-glow { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+.pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
