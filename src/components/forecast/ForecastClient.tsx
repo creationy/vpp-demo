@@ -17,6 +17,7 @@ import {
   CheckCircle2,
   Loader2,
   Layers,
+  Trash2,
 } from "lucide-react";
 
 const MAINTENANCE_TYPES = ["세척", "점검", "수리", "교체", "기타"] as const;
@@ -43,26 +44,42 @@ export default function ForecastClient({
   });
   const [isSaving, setIsSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [localLogs, setLocalLogs] = useState(maintenanceLogs);
 
   const handleMaintenanceSave = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSaving(true);
     const supabase = createClient();
     
-    // 실제 DB에는 panel_count 컬럼이 없을 수 있으므로 notes에 병합하거나 
-    // 데모용으로만 처리 (현재는 notes 앞에 추가)
     const notesWithPanels = `[패널: ${mForm.panelCount}매] ${mForm.notes}`;
     
-    await supabase.from("maintenance_logs").insert({
+    const { data, error } = await supabase.from("maintenance_logs").insert({
       facility_id: facilityId,
       maintenance_date: mForm.date,
       maintenance_type: mForm.type,
       notes: notesWithPanels || null,
-    });
+    }).select().single();
+    
+    if (!error && data) {
+      setLocalLogs(prev => [data, ...prev]);
+    }
     
     setIsSaving(false);
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
+  };
+
+  const handleDelete = async (id: string) => {
+    if (!confirm("이 기록을 삭제하시겠습니까?")) return;
+
+    const supabase = createClient();
+    const { error } = await supabase.from("maintenance_logs").delete().eq("id", id);
+
+    if (!error) {
+      setLocalLogs(prev => prev.filter(log => log.id !== id));
+    } else {
+      alert("삭제 실패: " + error.message);
+    }
   };
 
   const TABS = [
@@ -220,26 +237,34 @@ export default function ForecastClient({
             </div>
 
             {/* 최근 이력 */}
-            {maintenanceLogs.length > 0 && (
+            {localLogs.length > 0 && (
               <div>
                 <h3 style={{ fontSize: 13, color: "var(--color-text-secondary)", marginBottom: 10 }}>최근 유지보수 이력</h3>
-                {maintenanceLogs.map((log, i) => (
+                {localLogs.map((log, i) => (
                   <motion.div key={log.id} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.06 }}
-                    className="glass-card" style={{ padding: "12px 14px", marginBottom: 8 }}>
+                    className="glass-card" style={{ padding: "12px 14px", marginBottom: 8, position: "relative" }}>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                       <span style={{ fontWeight: 700, fontSize: 13, display: "flex", alignItems: "center", gap: 6 }}>
                         <Wrench size={13} color="var(--color-secondary)" />
                         {log.maintenance_type}
                       </span>
-                      <span style={{ fontSize: 11, color: "var(--color-text-muted)", fontFamily: "var(--font-mono)" }}>
-                        {log.maintenance_date}
-                      </span>
+                      <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                        <span style={{ fontSize: 11, color: "var(--color-text-muted)", fontFamily: "var(--font-mono)" }}>
+                          {log.maintenance_date}
+                        </span>
+                        <button 
+                          onClick={() => handleDelete(log.id)}
+                          style={{ background: "none", border: "none", padding: 4, color: "var(--color-text-muted)", cursor: "pointer", display: "flex", alignItems: "center" }}
+                        >
+                          <Trash2 size={14} />
+                        </button>
+                      </div>
                     </div>
                     <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 6 }}>
                       <span style={{ fontSize: 10, padding: "2px 6px", background: "var(--color-bg-elevated)", borderRadius: 4, color: "var(--color-text-secondary)" }}>
                         패널 {log.panel_count || 100}매
                       </span>
-                      {log.notes && <p style={{ fontSize: 12, color: "var(--color-text-secondary)", margin: 0 }}>{log.notes.replace(/\[패널: .*?매\] /, "")}</p>}
+                      {log.notes && <p style={{ fontSize: 12, color: "var(--color-text-secondary)", margin: 0, flex: 1 }}>{log.notes.replace(/\[패널: .*?매\] /, "")}</p>}
                     </div>
                   </motion.div>
                 ))}
