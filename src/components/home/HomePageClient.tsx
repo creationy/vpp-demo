@@ -80,7 +80,7 @@ export default function HomePageClient() {
       />
 
       {/* 헤더 */}
-      <div className="page-header" style={{ position: "absolute", top: 0, left: 0, right: 0, zIndex: 10 }}>
+      <div className="page-header" style={{ position: "relative", zIndex: 10 }}>
         <div>
           <div className="badge badge-primary" style={{ marginBottom: 4, display: "flex", alignItems: "center", gap: 4 }}>
             <MapPin size={11} />
@@ -141,7 +141,7 @@ export default function HomePageClient() {
       </AnimatePresence>
 
       {/* 지도 */}
-      <div style={{ flex: 1, marginTop: 80 }}>
+      <div style={{ flex: 1, marginTop: 0 }}>
         {(gpsStatus === "granted" || gpsStatus === "denied") && (
           <MapPicker
             onLocationSelect={handleLocationSelect}

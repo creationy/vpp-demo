@@ -274,7 +274,7 @@ export default function DashboardClient({
                     }}
                   >
                     <Send size={18} />
-                    전력시장 입찰하기
+                    VPP 참여하기
                   </motion.button>
                 )}
 
@@ -295,7 +295,7 @@ export default function DashboardClient({
                       color: "var(--color-primary)", fontSize: 13, fontWeight: 700,
                     }}
                   >
-                    ✅ 입찰 완료 — {tomorrowStr} {totalForecast.toFixed(1)} kWh
+                    ✅ 참여 완료 — {tomorrowStr} {totalForecast.toFixed(1)} kWh
                   </motion.div>
                 )}
               </motion.div>
