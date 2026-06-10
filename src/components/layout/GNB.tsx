@@ -9,6 +9,7 @@ import {
   BrainCircuit,
   Globe,
   Info,
+  CandlestickChart,
 } from "lucide-react";
 
 const tabs = [
@@ -16,6 +17,7 @@ const tabs = [
   { id: "dashboard", label: "대시보드", path: "/dashboard", Icon: BarChart3 },
   { id: "national", label: "전국현황", path: "/national", Icon: Globe },
   { id: "forecast", label: "예측제어", path: "/forecast", Icon: BrainCircuit },
+  { id: "stocks", label: "주식추천", path: "/stocks", Icon: CandlestickChart },
   { id: "about", label: "정보", path: "/about", Icon: Info },
 ];
 
