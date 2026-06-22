@@ -38,8 +38,10 @@ export default function DashboardClient({
   todayRecord, monthlyIncentive, todayIncentive, mape,
 }: DashboardClientProps) {
   const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(today.getDate() + 1); // 월/연 경계 자동 처리 (예: 6/30 → 7/1)
   const todayStr = `${today.getMonth() + 1}월 ${today.getDate()}일`;
-  const tomorrowStr = `${today.getMonth() + 1}월 ${today.getDate() + 1}일`;
+  const tomorrowStr = `${tomorrow.getMonth() + 1}월 ${tomorrow.getDate()}일`;
 
   const totalActual = (todayRecord?.actual_kwh ?? []).reduce((s, v) => s + v, 0);
   const totalPredicted = (todayRecord?.predicted_kwh ?? []).reduce((s, v) => s + v, 0);

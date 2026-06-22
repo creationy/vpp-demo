@@ -57,12 +57,12 @@ VALUES
 
 -- ── 5. 예측 모델 선택 상태 ────────────────────────────────────────────────────
 INSERT INTO model_selections (facility_id, model_type, is_active)
-VALUES ('11111111-1111-1111-1111-111111111111', 'hybrid', true);
+VALUES ('11111111-1111-1111-1111-111111111111', 'lightgbm', true);
 
 -- ── 6. MLOps 재학습 이력 더미 데이터 ─────────────────────────────────────────
 INSERT INTO retraining_history (facility_id, model_type, trigger_reason, before_mape, after_mape, status, started_at, completed_at)
 VALUES
-  ('11111111-1111-1111-1111-111111111111', 'hybrid',
+  ('11111111-1111-1111-1111-111111111111', 'lightgbm',
    'MAPE 임계값 초과 (12.3% > 10%)',
    12.3, 4.7, 'completed',
    now() - INTERVAL '7 days',
@@ -77,7 +77,7 @@ VALUES
    9.6, 3.9, 'completed',
    now() - INTERVAL '60 days',
    now() - INTERVAL '60 days' + INTERVAL '22 minutes'),
-  ('11111111-1111-1111-1111-111111111111', 'hybrid',
+  ('11111111-1111-1111-1111-111111111111', 'lightgbm',
    '초기 모델 학습',
    NULL, 6.8, 'completed',
    now() - INTERVAL '180 days',

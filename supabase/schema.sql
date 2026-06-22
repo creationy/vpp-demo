@@ -84,7 +84,7 @@ CREATE TABLE model_selections (
   id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   facility_id UUID NOT NULL REFERENCES facilities(id) ON DELETE CASCADE,
   model_type  TEXT NOT NULL
-                CHECK (model_type IN ('lstm', 'xgboost', 'hybrid')),
+                CHECK (model_type IN ('lstm', 'xgboost', 'lightgbm')),
   is_active   BOOLEAN NOT NULL DEFAULT true,
   updated_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
   UNIQUE (facility_id)
