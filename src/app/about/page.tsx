@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
+import { LiquidButton } from "@/components/ui/liquid-glass-button";
 import {
   Zap,
   Radio,
@@ -371,14 +372,14 @@ export default function AboutPage() {
             지금 바로 내 태양광 설비를 등록하고<br />
             <strong style={{ color: "var(--color-primary)" }}>VPP 인센티브</strong>를 받아보세요!
           </p>
-          <Link
-            href="/home"
-            className="btn-primary"
-            style={{ display: "inline-flex", width: "auto", padding: "16px 40px", gap: 10 }}
-          >
-            <Zap size={18} />
-            지금 참여하기
-            <ChevronRight size={16} style={{ marginLeft: -4 }} />
+          <Link href="/home" style={{ textDecoration: "none", display: "inline-block" }}>
+            <LiquidButton size="xl" className="font-bold">
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+                <Zap size={18} />
+                지금 참여하기
+                <ChevronRight size={16} style={{ marginLeft: -4 }} />
+              </span>
+            </LiquidButton>
           </Link>
         </div>
       </AnimatedSection>

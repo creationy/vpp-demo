@@ -1,6 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Tailwind CSS v4 — @import 방식(자동 콘텐츠 감지 활성화).
+   구버전 @tailwind base/components/utilities 지시어에서 마이그레이션. */
+@import "tailwindcss";
 
 /* ── 디자인 시스템 (Mobile First) ────────────────────────────────────── */
 :root {
@@ -70,6 +70,29 @@
   --color-secondary: var(--day-secondary);
   --color-secondary-glow: rgba(0, 122, 255, 0.15);
   --color-accent: var(--day-accent);
+}
+
+/* ── shadcn/ui 토큰 매핑 (Tailwind v4 @theme) ─────────────────────────────
+   liquid-glass-button 등 shadcn 컴포넌트가 쓰는 bg-primary, text-primary-foreground,
+   border-input, ring-ring 같은 토큰 클래스를 앱의 기존 --color-* 팔레트에 연결한다.
+   `inline` 이라 새 CSS 변수를 :root 에 만들지 않아 기존 변수와 충돌하지 않고,
+   주/야간 테마 전환(--color-* 재정의)을 그대로 따라간다. */
+@theme inline {
+  --color-background: var(--color-bg-base);
+  --color-foreground: var(--color-text-primary);
+  --color-primary: var(--color-primary);
+  --color-primary-foreground: #ffffff;
+  --color-secondary: var(--color-secondary);
+  --color-secondary-foreground: #ffffff;
+  --color-muted: var(--color-bg-elevated);
+  --color-muted-foreground: var(--color-text-muted);
+  --color-accent: var(--color-bg-elevated);
+  --color-accent-foreground: var(--color-text-primary);
+  --color-destructive: var(--color-danger);
+  --color-destructive-foreground: #ffffff;
+  --color-border: var(--color-glass-border);
+  --color-input: var(--color-glass-border);
+  --color-ring: var(--color-primary);
 }
 
 /* ── Base Layout ───────────────────────────────────────────────────────── */
