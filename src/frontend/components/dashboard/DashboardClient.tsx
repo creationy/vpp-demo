@@ -2,10 +2,10 @@
 
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import PowerChart from "@/components/dashboard/PowerChart";
-import IncentiveCard from "@/components/dashboard/IncentiveCard";
-import CelebrationOverlay from "@/components/dashboard/CelebrationOverlay";
-import type { PowerRecord } from "@/types/database.types";
+import PowerChart from "@/frontend/components/dashboard/PowerChart";
+import IncentiveCard from "@/frontend/components/dashboard/IncentiveCard";
+import CelebrationOverlay from "@/frontend/components/dashboard/CelebrationOverlay";
+import type { PowerRecord } from "@/database/types";
 import {
   Activity, TrendingUp, TrendingDown, BarChart3,
   Wifi, BrainCircuit, Loader2, Zap, Clock, Send,

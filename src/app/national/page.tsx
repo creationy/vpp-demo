@@ -1,4 +1,4 @@
-import NationalClient from "@/components/national/NationalClient";
+import NationalClient from "@/frontend/components/national/NationalClient";
 
 export const metadata = {
   title: "전국 현황 — VPP 태양광",

@@ -1,10 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import GridFairy from "@/components/national/GridFairy";
-import KoreaMap from "@/components/national/KoreaMap";
-import { useFacilities } from "@/hooks/useFacilities";
-import { useGridStatus } from "@/hooks/useGridStatus";
+import GridFairy from "@/frontend/components/national/GridFairy";
+import KoreaMap from "@/frontend/components/national/KoreaMap";
+import { useFacilities } from "@/frontend/hooks/useFacilities";
+import { useGridStatus } from "@/frontend/hooks/useGridStatus";
 import { Radio, Loader2, Map as MapIcon } from "lucide-react";
 
 export default function NationalClient() {

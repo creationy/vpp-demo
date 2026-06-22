@@ -8,7 +8,7 @@ import {
   Activity,
   Zap,
 } from "lucide-react";
-import type { FairyMood } from "@/types/database.types";
+import type { FairyMood } from "@/database/types";
 
 interface GridFairyProps {
   mood: FairyMood;

@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
-import { LiquidButton } from "@/components/ui/liquid-glass-button";
+import { LiquidButton } from "@/frontend/components/ui/liquid-glass-button";
 import {
   Zap,
   Radio,

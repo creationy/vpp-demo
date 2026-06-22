@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { RetrainingHistory } from "@/types/database.types";
+import type { RetrainingHistory } from "@/database/types";
 import {
   CheckCircle2,
   Loader2,

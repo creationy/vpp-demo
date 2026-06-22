@@ -6,7 +6,7 @@ import {
   AdvancedMarker,
 } from "@vis.gl/react-google-maps";
 import { motion } from "framer-motion";
-import type { Facility } from "@/types/database.types";
+import type { Facility } from "@/database/types";
 import { useEffect, useState } from "react";
 
 interface NationalMapProps {

@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Noto_Sans_KR, Inter, JetBrains_Mono } from "next/font/google";
-import "./globals.css";
-import GNB from "@/components/layout/GNB";
-import ThemeManager from "@/components/layout/ThemeManager";
+import "@/frontend/styles/globals.css";
+import GNB from "@/frontend/components/layout/GNB";
+import ThemeManager from "@/frontend/components/layout/ThemeManager";
 
 const notoSansKR = Noto_Sans_KR({
   subsets: ["latin"],

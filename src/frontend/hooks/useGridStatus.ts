@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import type { FairyMood } from "@/types/database.types";
+import type { FairyMood } from "@/database/types";
 
 interface GridStatus {
   mood: FairyMood;

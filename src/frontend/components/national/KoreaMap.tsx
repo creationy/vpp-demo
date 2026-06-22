@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sun, X } from "lucide-react";
 import { geoMercator, geoPath } from "d3-geo";
-import type { Facility } from "@/types/database.types";
+import type { Facility } from "@/database/types";
 import koreaGeoData from "./KOR.geo.json";
 
 interface KoreaMapProps {

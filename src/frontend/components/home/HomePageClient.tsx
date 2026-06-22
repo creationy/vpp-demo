@@ -4,12 +4,12 @@ import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
-import type { FacilityFormData } from "@/components/home/FacilityForm";
-import SolarInstallAnimation from "@/components/home/SolarInstallAnimation";
+import type { FacilityFormData } from "@/frontend/components/home/FacilityForm";
+import SolarInstallAnimation from "@/frontend/components/home/SolarInstallAnimation";
 import { MapPin, Satellite, AlertTriangle, Loader2 } from "lucide-react";
 
-const MapPicker = dynamic(() => import("@/components/home/MapPicker"), { ssr: false });
-const FacilityForm = dynamic(() => import("@/components/home/FacilityForm"), { ssr: false });
+const MapPicker = dynamic(() => import("@/frontend/components/home/MapPicker"), { ssr: false });
+const FacilityForm = dynamic(() => import("@/frontend/components/home/FacilityForm"), { ssr: false });
 
 interface LocationState {
   lat: number;

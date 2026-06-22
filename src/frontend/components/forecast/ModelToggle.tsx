@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import type { ModelType } from "@/types/database.types";
+import type { ModelType } from "@/database/types";
 import {
   Brain,
   TreePine,

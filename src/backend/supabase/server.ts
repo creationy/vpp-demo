@@ -1,6 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
-import type { Database } from "@/types/database.types";
+import type { Database } from "@/database/types";
 
 /**
  * 서버(RSC, Route Handler, Server Action) 전용 Supabase 클라이언트

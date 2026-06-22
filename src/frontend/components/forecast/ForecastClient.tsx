@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { createClient } from "@/lib/supabase/client";
-import ModelToggle from "@/components/forecast/ModelToggle";
-import RetrainingFlow from "@/components/forecast/RetrainingFlow";
-import type { ModelType, MaintenanceLog, RetrainingHistory } from "@/types/database.types";
+import { createClient } from "@/frontend/lib/supabase-browser";
+import ModelToggle from "@/frontend/components/forecast/ModelToggle";
+import RetrainingFlow from "@/frontend/components/forecast/RetrainingFlow";
+import type { ModelType, MaintenanceLog, RetrainingHistory } from "@/database/types";
 import {
   BrainCircuit,
   Wrench,

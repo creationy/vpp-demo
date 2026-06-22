@@ -1,4 +1,4 @@
-import HomePageClient from "@/components/home/HomePageClient";
+import HomePageClient from "@/frontend/components/home/HomePageClient";
 
 export const metadata = {
   title: "설비 등록 — VPP 태양광",

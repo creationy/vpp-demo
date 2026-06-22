@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { createClient } from "@/lib/supabase/client";
-import type { Facility } from "@/types/database.types";
+import { createClient } from "@/frontend/lib/supabase-browser";
+import type { Facility } from "@/database/types";
 
 // 데모용 전국 설비 데이터 (주요 거점)
 const DEMO_FACILITIES: Facility[] = [

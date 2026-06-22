@@ -11,7 +11,7 @@ import {
   ResponsiveContainer,
   ReferenceLine,
 } from "recharts";
-import type { PowerRecord } from "@/types/database.types";
+import type { PowerRecord } from "@/database/types";
 
 interface PowerChartProps {
   record: PowerRecord | null;
