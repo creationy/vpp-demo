@@ -9,6 +9,7 @@ import {
   BrainCircuit,
   Globe,
   Info,
+  Zap,
 } from "lucide-react";
 
 const tabs = [
@@ -20,90 +21,55 @@ const tabs = [
 ];
 
 /**
- * 정밀 정합 모바일 GNB
- * - flex: 1을 이용한 균등 배분
- * - 활성 인디케이터 중앙 정렬 최적화
+ * 반응형 글로벌 네비게이션
+ * - 모바일(<1024px): 하단 고정 탭바 (flex:1 균등 배분)
+ * - 데스크탑(≥1024px): 좌측 세로 사이드바 (브랜드 + 메뉴)
+ *   레이아웃 전환은 globals.css 의 미디어쿼리(.gnb 계열 클래스)로 처리하여
+ *   SSR 하이드레이션 깜빡임 없이 동작한다.
  */
 export default function GNB() {
   const pathname = usePathname();
 
   return (
-    <nav style={{
-      position: "fixed",
-      bottom: 0,
-      left: "50%",
-      transform: "translateX(-50%)",
-      width: "100%",
-      maxWidth: 500,
-      height: "calc(68px + env(safe-area-inset-bottom))",
-      background: "var(--color-bg-card)",
-      backdropFilter: "blur(24px)",
-      WebkitBackdropFilter: "blur(24px)",
-      borderTop: "1px solid var(--color-glass-border)",
-      display: "flex",
-      alignItems: "stretch", // 높이를 가득 채움
-      padding: "0 4px calc(env(safe-area-inset-bottom) / 1.5)",
-      zIndex: 1000,
-    }}>
+    <nav className="gnb">
+      {/* 데스크탑 전용 브랜드 헤더 (모바일에서는 CSS로 숨김) */}
+      <div className="gnb-brand">
+        <div className="gnb-brand-logo">
+          <Zap size={20} color="#fff" strokeWidth={2.4} />
+        </div>
+        <div className="gnb-brand-text">
+          <span className="gnb-brand-title gradient-text">VPP 태양광</span>
+          <span className="gnb-brand-sub">스마트 가상발전소</span>
+        </div>
+      </div>
+
       {tabs.map((tab) => {
         const isActive = pathname === tab.path;
         return (
-          <Link key={tab.id} href={tab.path} style={{ 
-            textDecoration: "none", 
-            flex: 1, 
-            display: "flex", 
-            justifyContent: "center",
-            alignItems: "center"
-          }}>
-            <div style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 2,
-              position: "relative",
-              width: "100%",
-              height: "100%",
-            }}>
-              {/* 활성 배경 (정중앙 고정) */}
+          <Link
+            key={tab.id}
+            href={tab.path}
+            className={`gnb-tab${isActive ? " is-active" : ""}`}
+            aria-current={isActive ? "page" : undefined}
+          >
+            <div className="gnb-tab-inner">
+              {/* 활성 배경 (탭 간 슬라이드 애니메이션) */}
               {isActive && (
                 <motion.div
                   layoutId="gnb-active-bg"
-                  style={{
-                    position: "absolute",
-                    width: 48,
-                    height: 48,
-                    borderRadius: 14,
-                    background: "var(--color-primary-glow)",
-                    zIndex: 1,
-                  }}
+                  className="gnb-active-bg"
                   transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                 />
               )}
 
               <motion.div
-                animate={{
-                  scale: isActive ? 1.05 : 1,
-                  y: isActive ? -1 : 0,
-                }}
-                style={{
-                  position: "relative",
-                  zIndex: 2,
-                  color: isActive ? "var(--color-primary)" : "var(--color-text-muted)",
-                }}
+                className="gnb-icon"
+                animate={{ scale: isActive ? 1.05 : 1 }}
               >
                 <tab.Icon size={22} strokeWidth={isActive ? 2.5 : 2} />
               </motion.div>
-              
-              <span style={{
-                fontSize: 10,
-                fontWeight: isActive ? 800 : 500,
-                color: isActive ? "var(--color-primary)" : "var(--color-text-muted)",
-                zIndex: 2,
-                marginTop: 2,
-              }}>
-                {tab.label}
-              </span>
+
+              <span className="gnb-label">{tab.label}</span>
             </div>
           </Link>
         );

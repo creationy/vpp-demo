@@ -101,6 +101,7 @@ body {
   overflow-y: auto;
   padding-bottom: calc(72px + env(safe-area-inset-bottom));
   width: 100%;
+  position: relative; /* 풀블리드(absolute) 페이지의 기준 컨테이너 */
 }
 
 /* ── Typography ────────────────────────────────────────────────────────── */
@@ -174,3 +175,210 @@ body {
 
 @keyframes pulse-glow { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
 .pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+
+/* ── GNB (글로벌 네비게이션) — 모바일 기본: 하단 탭바 ───────────────────── */
+.gnb {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 500px;
+  height: calc(68px + env(safe-area-inset-bottom));
+  background: var(--color-bg-card);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-top: 1px solid var(--color-glass-border);
+  display: flex;
+  align-items: stretch;
+  padding: 0 4px calc(env(safe-area-inset-bottom) / 1.5);
+  z-index: 1000;
+}
+
+.gnb-brand { display: none; } /* 모바일에서는 브랜드 헤더 숨김 */
+
+.gnb-tab {
+  text-decoration: none;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gnb-tab-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.gnb-active-bg {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--color-primary-glow);
+  z-index: 1;
+}
+
+.gnb-icon {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  color: var(--color-text-muted);
+  transition: color 0.2s;
+}
+
+.gnb-label {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  z-index: 2;
+  margin-top: 2px;
+  transition: color 0.2s;
+}
+
+.gnb-tab.is-active .gnb-icon,
+.gnb-tab.is-active .gnb-label {
+  color: var(--color-primary);
+}
+
+.gnb-tab.is-active .gnb-label {
+  font-weight: 800;
+}
+
+/* ── 데스크탑(≥1024px): 좌측 사이드바 + 와이드 셸 ───────────────────────── */
+@media (min-width: 1024px) {
+  body {
+    background-color: var(--color-bg-base);
+    background-image:
+      radial-gradient(circle at 12% 18%, var(--color-primary-glow) 0%, transparent 38%),
+      radial-gradient(circle at 88% 82%, var(--color-secondary-glow) 0%, transparent 42%);
+    background-attachment: fixed;
+  }
+
+  /* 셸: 모바일 컬럼 → 가로 와이드 레이아웃 */
+  .app-shell {
+    flex-direction: row;
+    max-width: 1280px;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    box-shadow: 0 0 80px rgba(0, 0, 0, 0.35);
+    background-color: var(--color-bg-base);
+  }
+
+  /* GNB → 좌측 세로 사이드바 (order로 본문 좌측에 배치) */
+  .gnb {
+    order: -1;
+    position: relative;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    width: 248px;
+    max-width: 248px;
+    height: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 6px;
+    padding: 28px 16px;
+    border-top: none;
+    border-right: 1px solid var(--color-glass-border);
+    background: var(--color-bg-surface);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .gnb-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 8px 24px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--color-glass-border);
+  }
+
+  .gnb-brand-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px var(--color-primary-glow);
+  }
+
+  .gnb-brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.25;
+  }
+
+  .gnb-brand-title {
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .gnb-brand-sub {
+    font-size: 11px;
+    color: var(--color-text-muted);
+  }
+
+  .gnb-tab {
+    flex: 0 0 auto;
+    justify-content: stretch;
+  }
+
+  .gnb-tab-inner {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 14px;
+    width: 100%;
+    height: auto;
+    padding: 12px 14px;
+    border-radius: 12px;
+  }
+
+  .gnb-tab:hover .gnb-tab-inner {
+    background: var(--color-bg-elevated);
+  }
+
+  .gnb-active-bg {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 12px;
+  }
+
+  .gnb-label {
+    font-size: 14px;
+    margin-top: 0;
+  }
+
+  /* 본문: 사이드바 옆 영역을 채우되, 하단 탭바가 없으므로 패딩 제거 */
+  .main-content {
+    padding-bottom: 0;
+  }
+
+  /* 일반 페이지 본문은 가독성을 위해 중앙 정렬 컬럼으로 (지도 등 풀블리드 페이지는 .section-pad 미사용이라 영향 없음) */
+  .section-pad {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 28px;
+    width: 100%;
+  }
+
+  .page-header {
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+}
